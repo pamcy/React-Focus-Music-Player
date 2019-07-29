@@ -1,0 +1,89 @@
+.playlist {
+  grid-area: playlist;
+  height: 100%;
+  overflow-y: auto;
+  background-color: $black;
+  border: 1px solid yellow;
+}
+
+.playlist__header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: rem(50);
+  align-items: end;
+  padding: rem(75) rem(45) rem(45);
+}
+
+.playlist__cover-img {
+  width: 90px;
+  height: 90px;
+  border: 1px solid $gray;
+}
+
+.playlist__album-year {
+  @extend %text--14;
+
+  color: $gray;
+}
+
+.playlist__album-name {
+  @extend %heading--32;
+
+  color: $white;
+}
+
+.playlist__table-item {
+  display: grid;
+  grid-template-columns: 2% 3% 65% 8% auto auto;
+  grid-column-gap: rem(30);
+  align-items: center;
+  padding: rem(16) rem(60) rem(16) rem(20);
+  color: $white;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $black-dark;
+  }
+}
+
+.playlist__table-item--head {
+  border-bottom: none !important;
+  color: $red;
+  text-transform: uppercase;
+}
+
+.table-head__liked-icon {
+  grid-column: 6 / span 3;
+  width: rem(14);
+}
+
+.table-head__length,
+.table-item__no,
+.table-item__length {
+  text-align: center;
+}
+
+.table-item__no,
+.table-item__song {
+  @extend %medium--18;
+}
+
+.table-item__featuring {
+  @extend %medium--12;
+
+  margin-left: rem(5);
+}
+
+.table-item__length,
+.table-item__total-likes {
+  @extend %text--14;
+}
+
+// .table-item__length,
+// .table-head__length,
+// .table-head__title,
+// .table-item__song,
+// .table-head__no,
+// .table-item__no,
+// .table-item__playing-icon {
+//   border: 1px solid green;
+// }
