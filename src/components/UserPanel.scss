@@ -1,0 +1,31 @@
+.user-panel {
+  grid-area: userPanel;
+  display: grid;
+  align-content: space-between;
+  width: 80px;
+  padding: rem(45) 0;
+  background-color: $black-light;
+  border: 1px solid lightgreen;
+
+  img {
+    display: block;
+    margin: auto;
+  }
+}
+
+.user-panel__avatar-img {
+  width: 56px;
+  height: 56px;
+  border: 1px solid $gray;
+  border-radius: 50%;
+}
+
+.user-panel__menu {
+  img:not(:last-of-type) {
+    margin-bottom: rem(60);
+  }
+}
+
+.user-panel__setting {
+  margin-top: rem(28) !important;
+}
