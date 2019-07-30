@@ -13,6 +13,7 @@ const albumInfo = {
       length: '1:52',
       totalLikes: '13,290',
       liked: false,
+      path: '/audios/Jazz_Apricot.mp3',
     },
     {
       id: 2,
@@ -21,6 +22,7 @@ const albumInfo = {
       length: '2:26',
       totalLikes: '16,026',
       liked: false,
+      path: '/audios/Write_You.mp3',
     },
     {
       id: 3,
@@ -29,6 +31,7 @@ const albumInfo = {
       length: '2:41',
       totalLikes: '8,162',
       liked: false,
+      path: '/audios/Fresh_Healthy_Perspectives.mp3',
     },
     {
       id: 4,
@@ -37,6 +40,7 @@ const albumInfo = {
       length: '2:51',
       totalLikes: '8,369',
       liked: true,
+      path: '/audios/Good_Job.mp3',
     },
     {
       id: 5,
@@ -45,6 +49,7 @@ const albumInfo = {
       length: '3:25',
       totalLikes: '6,041',
       liked: false,
+      path: '/audios/It_Was_a_Fine_Day.mp3',
     },
     {
       id: 6,
@@ -53,6 +58,7 @@ const albumInfo = {
       length: '2:12',
       totalLikes: '12,278',
       liked: false,
+      path: '/audios/Jazz_Mango.mp3',
     },
     {
       id: 7,
@@ -61,6 +67,7 @@ const albumInfo = {
       length: '3:11',
       totalLikes: '7,702',
       liked: false,
+      path: '/audios/Shredded_aka_Full_Circle.mp3',
     },
     {
       id: 8,
@@ -69,6 +76,7 @@ const albumInfo = {
       length: '1:40',
       totalLikes: '13,049',
       liked: true,
+      path: '/audios/Unproductive_Meetings.mp3',
     },
     {
       id: 9,
@@ -77,6 +85,7 @@ const albumInfo = {
       length: '2:40',
       totalLikes: '10,037',
       liked: false,
+      path: '/audios/Bright_Idea.mp3',
     },
     {
       id: 10,
@@ -85,6 +94,7 @@ const albumInfo = {
       length: '3:13',
       totalLikes: '5,887',
       liked: false,
+      path: '/audios/Church_of_8_Wheels.mp3',
     },
   ],
 };

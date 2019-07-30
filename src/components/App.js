@@ -9,10 +9,21 @@ import albumInfo from '../initial-playlist';
 class App extends React.Component {
   state = {
     album: albumInfo,
+    current: {},
+  };
+
+  componentDidMount() {
+    this.init();
+  }
+
+  init = () => {
+    const { album } = this.state;
+
+    this.setState({ current: album.tracks[0] });
   };
 
   render() {
-    const { album } = this.state;
+    const { album, current } = this.state;
 
     return (
       <div className="app">
@@ -24,7 +35,7 @@ class App extends React.Component {
           />
           <Playlist album={album} />
           <UserPanel />
-          <PlayingBar />
+          <PlayingBar album={album} current={current} />
         </div>
       </div>
     );
