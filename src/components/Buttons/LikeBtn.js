@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LikeBtn = ({ likeStatus }) => {
+  console.log(likeStatus);
   const fillColor = { fill: likeStatus ? '#964a4d' : 'none' };
 
   return (

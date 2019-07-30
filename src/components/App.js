@@ -17,7 +17,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="wrapper-l container">
-          <CoverArtist />
+          <CoverArtist
+            artistCover={album.artistCover}
+            artist={album.artist}
+            followers={album.followers}
+          />
           <Playlist album={album} />
           <UserPanel />
           <PlayingBar />
