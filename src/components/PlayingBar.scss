@@ -1,0 +1,142 @@
+.playing-bar {
+  grid-area: playingBar;
+  background-color: #361024;
+  background-image: linear-gradient(180deg, #361024 70%, #361024 100%);
+}
+
+/* ---------------------------------
+Progress bar
+--------------------------------- */
+.playing-bar__progress {
+  width: 100%;
+  height: 13px;
+  cursor: pointer;
+}
+
+.progress__wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+}
+
+.progress__buffered,
+.progress__played {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.progress__buffered {
+  width: 60%;
+  background-color: $gray-light;
+}
+
+.progress__played {
+  width: 30%;
+  background-color: $pink;
+}
+
+.playing-bar__time {
+  @extend %text--12;
+
+  display: flex;
+  justify-content: space-between;
+  padding: rem(8) rem(24);
+  color: $white;
+}
+
+/* ---------------------------------
+Panel bar
+--------------------------------- */
+.playingbar__panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: rem(10);
+  padding: rem(8) rem(78) rem(12);
+}
+
+.panel__album {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-column-gap: rem(20);
+  align-items: center;
+}
+
+.panel__album-img {
+  width: 40px;
+  height: 40px;
+}
+
+.panel__album-content {
+  color: $white;
+}
+
+.panel__album-title {
+  @extend %heading--20;
+}
+
+.panel__album-featuring {
+  @extend %text--12;
+}
+
+.panel__controller {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+.controller__btn {
+  cursor: pointer;
+}
+
+.controller__btn--play {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: rem(16);
+  border: 1px solid white;
+  border-radius: 50%;
+
+  img {
+    width: 18px;
+  }
+}
+
+.panel__right {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-items: end;
+  align-items: center;
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+}
+
+.volume__bar {
+  width: 100px;
+  margin-left: rem(8);
+  border-radius: 3px;
+  background-color: $white;
+  cursor: pointer;
+}
+
+.volume__bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 6px;
+}
+
+.volume__bar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  border-radius: 3px;
+  background-color: $red;
+}
