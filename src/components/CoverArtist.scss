@@ -1,16 +1,16 @@
 .cover-artist {
   grid-area: coverArtist;
-  border: 1px solid red;
+  height: 100%;
 }
 
 .cover-artist__wrapper {
   display: block;
   position: relative;
   width: 100%;
-  height: auto;
-  padding-top: 150%;
+  height: 100%;
   overflow: hidden;
-  background: url("/images/artist.jpg") 50% 50% no-repeat;
+  background: url("https://via.placeholder.com/800x1200") 50% 50% no-repeat;
+  // background: url("/images/artist.jpg") 50% 50% no-repeat;
   background-size: cover;
 
   &::before {
@@ -22,11 +22,53 @@
     left: 0;
     max-width: 100%;
     max-height: 100%;
-    background-image: linear-gradient(180deg, transparent 0%, $black 80%);
-    opacity: 0.3;
+    background-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 60%,
+      $black 80%
+    );
+    opacity: 0.7;
   }
 }
 
 .cover-artist__info {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 rem(30) rem(30) rem(50);
+}
+
+.cover-artist__subtitle {
+  @extend %text--14;
+
+  color: $pink;
+}
+
+.cover-artist__name {
+  @extend %heading--24;
+
+  color: $white;
+}
+
+.cover-artist__info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: rem(20);
+}
+
+.cover-artist__follow {
+  @extend %text--11;
+
+  display: flex;
+  flex-direction: column;
+  color: $white;
+}
+
+.cover-artist__btns {
+  .follow-btn {
+    margin-right: rem(10);
+  }
 }

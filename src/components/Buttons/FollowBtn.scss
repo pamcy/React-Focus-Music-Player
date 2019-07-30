@@ -1,0 +1,11 @@
+.follow-btn {
+  @extend %heading--14;
+
+  width: 128px;
+  padding: rem(7) rem(10);
+  border: 1px solid $red;
+  border-radius: 20px;
+  color: $red;
+  text-align: center;
+  text-transform: uppercase;
+}

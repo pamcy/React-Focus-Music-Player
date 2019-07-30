@@ -3,18 +3,10 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-
-  @include media('above-tablet') {
-    padding: 0 25px;
-  }
-
-  @include media('below-tablet') {
-    padding: 0 15px;
-  }
 }
 
-.wrapper-s {
+.wrapper-l {
   @extend %wrapper-style;
 
-  max-width: 750px;
+  max-width: 1600px;
 }

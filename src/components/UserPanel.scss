@@ -5,7 +5,6 @@
   width: 80px;
   padding: rem(45) 0;
   background-color: $black-light;
-  border: 1px solid lightgreen;
 
   img {
     display: block;
@@ -21,6 +20,8 @@
 }
 
 .user-panel__menu {
+  margin-top: -220px;
+
   img:not(:last-of-type) {
     margin-bottom: rem(60);
   }

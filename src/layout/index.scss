@@ -1,0 +1,16 @@
+@import "reset";
+@import "variables";
+@import "typography";
+@import "media-queries";
+@import "base";
+@import "functions";
+
+@import "../components/App.scss";
+@import "../components/CoverArtist.scss";
+@import "../components/Playlist.scss";
+@import "../components/UserPanel.scss";
+@import "../components/PlayingBar.scss";
+
+@import "../components/Buttons/PlayBtn.scss";
+@import "../components/Buttons/FollowBtn.scss";
+@import "../components/Buttons/LikeBtn.scss";
