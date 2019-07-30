@@ -34,7 +34,7 @@ const Playlist = ({ album }) => {
           </li>
 
           {album.tracks.map((track, i) => (
-            <li className="playlist__table-item" key={i}>
+            <li className="playlist__table-item" key={track.id}>
               <img
                 src="/images/current_playing.svg"
                 alt="Current playing"
