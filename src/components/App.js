@@ -9,8 +9,11 @@ import albumInfo from '../initial-playlist';
 class App extends React.Component {
   state = {
     album: albumInfo,
-    current: {},
+    currentSong: {},
+    isPlaying: false,
   };
+
+  audioRef = React.createRef();
 
   componentDidMount() {
     this.init();
@@ -18,12 +21,24 @@ class App extends React.Component {
 
   init = () => {
     const { album } = this.state;
+    this.setState({ currentSong: album.tracks[0] });
+  };
 
-    this.setState({ current: album.tracks[0] });
+  playSong = () => {
+    const { isPlaying } = this.state;
+    const audio = this.audioRef.current;
+
+    this.setState({ isPlaying: !isPlaying });
+
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
   };
 
   render() {
-    const { album, current } = this.state;
+    const { album, currentSong, isPlaying } = this.state;
 
     return (
       <div className="app">
@@ -35,7 +50,13 @@ class App extends React.Component {
           />
           <Playlist album={album} />
           <UserPanel />
-          <PlayingBar album={album} current={current} />
+          <PlayingBar
+            audioRef={this.audioRef}
+            album={album}
+            currentSong={currentSong}
+            playSong={this.playSong}
+            isPlaying={isPlaying}
+          />
         </div>
       </div>
     );

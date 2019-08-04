@@ -34,8 +34,10 @@ Progress bar
 }
 
 .progress__played {
-  width: 30%;
+  width: 100%;
+  transform: translateX(-100%);
   background-color: $pink;
+  transition: transform 0.1s;
 }
 
 .playing-bar__time {
