@@ -13,6 +13,8 @@ class PlayingBar extends React.Component {
 
   progressRef = React.createRef();
 
+  bufferRef = React.createRef();
+
   componentDidUpdate() {
     const audio = this.props.audioRef.current;
     audio.addEventListener('timeupdate', this.updateProgressBar);
@@ -20,15 +22,22 @@ class PlayingBar extends React.Component {
 
   updateProgressBar = e => {
     this.setState({
-      currentTime: Math.floor(e.target.currentTime),
-      duration: Math.floor(e.target.duration),
+      currentTime: e.target.currentTime,
+      duration: e.target.duration,
     });
 
     const { currentTime, duration } = this.state;
-    const playedRatio = currentTime / duration;
+    const playedRatio = (currentTime / duration) * 100;
     const progressBar = this.progressRef.current;
 
-    progressBar.style.transform = `translateX(${-(100 - playedRatio * 100)}%)`;
+    progressBar.style.transform = `translateX(${-(100 - playedRatio)}%)`;
+
+    const audio = this.props.audioRef.current;
+    const lastBuffered = audio.buffered.end(audio.buffered.length - 1);
+    const bufferedRatio = (lastBuffered / duration) * 100;
+    const bufferBar = this.bufferRef.current;
+
+    bufferBar.style.transform = `translateX(${-(100 - bufferedRatio)}%)`;
   };
 
   render() {
@@ -40,7 +49,7 @@ class PlayingBar extends React.Component {
       <div className="playing-bar">
         <div className="playing-bar__progress">
           <div className="progress__wrapper">
-            <div className="progress__buffered" />
+            <div ref={this.bufferRef} className="progress__buffered" />
             <div ref={this.progressRef} className="progress__played" />
           </div>
         </div>

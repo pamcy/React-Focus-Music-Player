@@ -2,6 +2,7 @@
   grid-area: playingBar;
   background-color: #361024;
   background-image: linear-gradient(180deg, #361024 70%, #361024 100%);
+  overflow: hidden;
 }
 
 /* ---------------------------------
@@ -25,19 +26,18 @@ Progress bar
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
   height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.1s;
 }
 
 .progress__buffered {
-  width: 60%;
   background-color: $gray-light;
 }
 
 .progress__played {
-  width: 100%;
-  transform: translateX(-100%);
   background-color: $pink;
-  transition: transform 0.1s;
 }
 
 .playing-bar__time {
