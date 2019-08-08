@@ -35,6 +35,8 @@ class PlayingBar extends React.Component {
       currentTime,
       duration,
       playSong,
+      playLast,
+      playNext,
       isPlaying,
       updateCurrentTime,
     } = this.props;
@@ -46,7 +48,6 @@ class PlayingBar extends React.Component {
           ref={progressBarRef}
           className="playing-bar__progress"
           onClick={updateCurrentTime}
-          tabIndex="0"
           role="button"
         >
           <div className="progress__wrapper">
@@ -74,26 +75,21 @@ class PlayingBar extends React.Component {
             <div className="controller__btn">
               <img src="/images/bar_shuffle.svg" alt="Shuffle" className="controller__-img" />
             </div>
-            <div className="controller__btn">
+            <div className="controller__btn" onClick={playLast} role="button">
               <img
                 src="/images/bar_previous_song.svg"
-                alt="Previous song"
+                alt="Last song"
                 className="controller__img"
               />
             </div>
-            <div
-              className="controller__btn controller__btn--play"
-              onClick={playSong}
-              tabIndex="0"
-              role="button"
-            >
+            <div className="controller__btn controller__btn--play" onClick={playSong} role="button">
               <img
                 src={`/images/bar_${playStatus}-button.svg`}
                 alt={`${playStatus} song`}
                 className="controller__img"
               />
             </div>
-            <div className="controller__btn" onClick={this.playNextSong}>
+            <div className="controller__btn" onClick={playNext}>
               <img src="/images/bar_next_song.svg" alt="Next song" className="controller__img" />
             </div>
             <div className="controller__btn">

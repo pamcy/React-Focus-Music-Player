@@ -55,6 +55,46 @@ class App extends React.Component {
     }
   };
 
+  playLast = () => {
+    const { album, currentSong } = this.state;
+    const { tracks } = album;
+
+    tracks.forEach((track, index) => {
+      if (track.path === currentSong.path) {
+        const trackIndex = index === 0 ? tracks[tracks.length - 1] : tracks[index - 1];
+
+        this.setState(
+          {
+            currentSong: trackIndex,
+            isPlaying: false,
+          },
+          () => {
+            this.playSong();
+          }
+        );
+      }
+    });
+  };
+
+  playNext = () => {
+    const { album, currentSong } = this.state;
+    const { tracks } = album;
+
+    tracks.forEach((track, index) => {
+      if (track.path === currentSong.path) {
+        this.setState(
+          {
+            currentSong: tracks[(index + 1) % tracks.length],
+            isPlaying: false,
+          },
+          () => {
+            this.playSong();
+          }
+        );
+      }
+    });
+  };
+
   updateProgressBar = e => {
     this.setState({
       currentTime: e.target.currentTime,
@@ -74,6 +114,10 @@ class App extends React.Component {
     const bufferBar = this.bufferRef.current;
 
     bufferBar.style.transform = `translateX(${-(100 - bufferedRatio)}%)`;
+
+    if (audio.ended) {
+      this.playNext();
+    }
   };
 
   updateCurrentTime = e => {
@@ -106,6 +150,8 @@ class App extends React.Component {
             playedRef={this.playedRef}
             bufferRef={this.bufferRef}
             playSong={this.playSong}
+            playLast={this.playLast}
+            playNext={this.playNext}
             updateCurrentTime={this.updateCurrentTime}
           />
         </div>
