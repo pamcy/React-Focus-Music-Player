@@ -9,4 +9,11 @@
   color: $white;
   text-align: center;
   text-transform: uppercase;
+  transform: scale(1);
+  transition: all 0.1s;
+
+  &:hover {
+    transform: scale(1.03);
+    background-color: lighten($red, 10%);
+  }
 }

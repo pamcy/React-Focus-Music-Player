@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import FollowBtn from './Buttons/FollowBtn';
 import PlayBtn from './Buttons/PlayBtn';
 
-const CoverArtist = ({ artist, artistCover, followers }) => {
+const CoverArtist = props => {
+  const { artist, artistCover, followers, isPlaying, playSong } = props;
+
   const artistImg = {
     backgroundImage: `url(${artistCover})`,
   };
@@ -24,7 +26,7 @@ const CoverArtist = ({ artist, artistCover, followers }) => {
             </div>
             <div className="cover-artist__btns">
               <FollowBtn />
-              <PlayBtn />
+              <PlayBtn playSong={playSong} isPlaying={isPlaying} />
             </div>
           </div>
         </div>

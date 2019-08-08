@@ -1,11 +1,10 @@
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import PlayBtn from './Buttons/PlayBtn';
 import LikeBtn from './Buttons/LikeBtn';
 
-const Playlist = ({ album }) => {
+const Playlist = ({ album, playSong, isPlaying }) => {
   return (
     <div className="playlist">
       <div className="playlist__wrapper">
@@ -16,7 +15,7 @@ const Playlist = ({ album }) => {
           <div className="playlist__album-info">
             <span className="playlist__album-year">{album.year}</span>
             <h1 className="playlist__album-name">{album.name}</h1>
-            <PlayBtn />
+            <PlayBtn playSong={playSong} isPlaying={isPlaying} />
           </div>
         </div>
         <ul className="playlist__table">

@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FollowBtn = props => {
-  return <button className="play-btn">Play</button>;
+const playBtn = ({ playSong, isPlaying }) => {
+  return (
+    <button type="button" className="play-btn" onClick={playSong}>
+      {isPlaying ? 'Pause' : 'Play'}
+    </button>
+  );
 };
 
-FollowBtn.propTypes = {};
+playBtn.propTypes = {};
 
-export default FollowBtn;
+export default playBtn;
