@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import PlayBtn from './Buttons/PlayBtn';
 import LikeBtn from './Buttons/LikeBtn';
 
-const Playlist = ({ album, playSong, isPlaying }) => {
+const Playlist = props => {
+  const { album, playSong, isPlaying, currentSong } = props;
+
   return (
     <div className="playlist">
       <div className="playlist__wrapper">
@@ -38,6 +40,7 @@ const Playlist = ({ album, playSong, isPlaying }) => {
                 src="/images/current_playing.svg"
                 alt="Current playing"
                 className="table-item__playing-icon"
+                style={{ opacity: track.id === currentSong.id ? '1' : '0' }}
               />
               <span className="table-item__no">{i + 1}</span>
               <h3 className="table-item__song">
@@ -64,6 +67,11 @@ Playlist.propTypes = {
     albumCover: PropTypes.string.isRequired,
     followers: PropTypes.string.isRequired,
     tracks: PropTypes.array.isRequired,
+  }).isRequired,
+  playSong: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  currentSong: PropTypes.shape({
+    id: PropTypes.number.isRequired,
   }).isRequired,
 };
 

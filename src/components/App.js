@@ -131,7 +131,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { album, isPlaying } = this.state;
+    const { album, currentSong, isPlaying } = this.state;
 
     return (
       <div className="app">
@@ -143,7 +143,12 @@ class App extends React.Component {
             isPlaying={isPlaying}
             playSong={this.playSong}
           />
-          <Playlist album={album} playSong={this.playSong} isPlaying={isPlaying} />
+          <Playlist
+            album={album}
+            playSong={this.playSong}
+            isPlaying={isPlaying}
+            currentSong={currentSong}
+          />
           <UserPanel />
           <PlayingBar
             {...this.state}
