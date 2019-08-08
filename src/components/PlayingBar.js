@@ -6,31 +6,53 @@ import LikeBtn from './Buttons/LikeBtn';
 import { timeConverter } from '../helpers';
 
 class PlayingBar extends React.Component {
+  static propTypes = {
+    audioRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
+    album: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      albumCover: PropTypes.string.isRequired,
+    }).isRequired,
+    currentSong: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      featuring: PropTypes.string.isRequired,
+      liked: PropTypes.bool.isRequired,
+      path: PropTypes.string.isRequired,
+    }).isRequired,
+    playSong: PropTypes.func.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
+  };
+
   state = {
     currentTime: null,
     duration: null,
   };
 
-  progressRef = React.createRef();
+  progressBarRef = React.createRef();
+
+  playedRef = React.createRef();
 
   bufferRef = React.createRef();
 
-  componentDidUpdate() {
+  componentDidMount() {
     const audio = this.props.audioRef.current;
+    audio.addEventListener('canplay', this.saveSongDuration);
     audio.addEventListener('timeupdate', this.updateProgressBar);
   }
 
-  updateProgressBar = e => {
+  saveSongDuration = e => {
     this.setState({
-      currentTime: e.target.currentTime,
       duration: e.target.duration,
     });
+  };
 
-    const { currentTime, duration } = this.state;
-    const playedRatio = (currentTime / duration) * 100;
-    const progressBar = this.progressRef.current;
+  updateProgressBar = e => {
+    const playedBar = this.playedRef.current;
+    const { duration } = this.state;
+    const playedRatio = (e.target.currentTime / duration) * 100;
 
-    progressBar.style.transform = `translateX(${-(100 - playedRatio)}%)`;
+    playedBar.style.transform = `translateX(${-(100 - playedRatio)}%)`;
 
     const audio = this.props.audioRef.current;
     const lastBuffered = audio.buffered.end(audio.buffered.length - 1);
@@ -38,6 +60,20 @@ class PlayingBar extends React.Component {
     const bufferBar = this.bufferRef.current;
 
     bufferBar.style.transform = `translateX(${-(100 - bufferedRatio)}%)`;
+
+    this.setState({
+      currentTime: e.target.currentTime,
+    });
+  };
+
+  updateCurrentTime = e => {
+    const audio = this.props.audioRef.current;
+    const progressBar = this.progressBarRef.current;
+    const totalWidth = progressBar.offsetWidth;
+    const playedRatio = e.pageX / totalWidth;
+    const { duration } = this.state;
+
+    audio.currentTime = playedRatio * duration;
   };
 
   render() {
@@ -47,10 +83,16 @@ class PlayingBar extends React.Component {
 
     return (
       <div className="playing-bar">
-        <div className="playing-bar__progress">
+        <div
+          ref={this.progressBarRef}
+          className="playing-bar__progress"
+          onClick={this.updateCurrentTime}
+          tabIndex="0"
+          role="button"
+        >
           <div className="progress__wrapper">
             <div ref={this.bufferRef} className="progress__buffered" />
-            <div ref={this.progressRef} className="progress__played" />
+            <div ref={this.playedRef} className="progress__played" />
           </div>
         </div>
         <div className="playing-bar__time">
@@ -80,7 +122,12 @@ class PlayingBar extends React.Component {
                 className="controller__img"
               />
             </div>
-            <div className="controller__btn controller__btn--play" onClick={playSong}>
+            <div
+              className="controller__btn controller__btn--play"
+              onClick={playSong}
+              tabIndex="0"
+              role="button"
+            >
               <img
                 src={`/images/bar_${playStatus}-button.svg`}
                 alt={`${playStatus} song`}
@@ -115,18 +162,5 @@ class PlayingBar extends React.Component {
     );
   }
 }
-
-PlayingBar.propTypes = {
-  album: PropTypes.shape({
-    artist: PropTypes.string.isRequired,
-    albumCover: PropTypes.string.isRequired,
-  }).isRequired,
-  currentSong: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    featuring: PropTypes.string.isRequired,
-    liked: PropTypes.bool.isRequired,
-    path: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default PlayingBar;
