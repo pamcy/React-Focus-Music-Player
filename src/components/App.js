@@ -10,18 +10,36 @@ class App extends React.Component {
   state = {
     album: albumInfo,
     currentSong: {},
+    currentTime: null,
+    duration: null,
     isPlaying: false,
   };
 
   audioRef = React.createRef();
 
+  progressBarRef = React.createRef();
+
+  playedRef = React.createRef();
+
+  bufferRef = React.createRef();
+
   componentDidMount() {
+    const audio = this.audioRef.current;
+
     this.init();
+    audio.addEventListener('canplay', this.saveSongDuration);
+    audio.addEventListener('timeupdate', this.updateProgressBar);
   }
 
   init = () => {
     const { album } = this.state;
     this.setState({ currentSong: album.tracks[0] });
+  };
+
+  saveSongDuration = e => {
+    this.setState({
+      duration: e.target.duration,
+    });
   };
 
   playSong = () => {
@@ -37,8 +55,39 @@ class App extends React.Component {
     }
   };
 
+  updateProgressBar = e => {
+    this.setState({
+      currentTime: e.target.currentTime,
+    });
+
+    const audio = this.audioRef.current;
+    const playedBar = this.playedRef.current;
+    const { currentTime, duration } = this.state;
+    const playedRatio = (currentTime / duration) * 100;
+
+    playedBar.style.transform = `translateX(${-(100 - playedRatio)}%)`;
+
+    if (audio.buffered.length <= 0) return;
+
+    const lastBuffered = audio.buffered.end(audio.buffered.length - 1);
+    const bufferedRatio = (lastBuffered / duration) * 100;
+    const bufferBar = this.bufferRef.current;
+
+    bufferBar.style.transform = `translateX(${-(100 - bufferedRatio)}%)`;
+  };
+
+  updateCurrentTime = e => {
+    const audio = this.audioRef.current;
+    const progressBar = this.progressBarRef.current;
+    const totalWidth = progressBar.offsetWidth;
+    const playedRatio = e.pageX / totalWidth;
+    const { duration } = this.state;
+
+    audio.currentTime = playedRatio * duration;
+  };
+
   render() {
-    const { album, currentSong, isPlaying } = this.state;
+    const { album } = this.state;
 
     return (
       <div className="app">
@@ -51,11 +100,13 @@ class App extends React.Component {
           <Playlist album={album} />
           <UserPanel />
           <PlayingBar
+            {...this.state}
             audioRef={this.audioRef}
-            album={album}
-            currentSong={currentSong}
+            progressBarRef={this.progressBarRef}
+            playedRef={this.playedRef}
+            bufferRef={this.bufferRef}
             playSong={this.playSong}
-            isPlaying={isPlaying}
+            updateCurrentTime={this.updateCurrentTime}
           />
         </div>
       </div>
