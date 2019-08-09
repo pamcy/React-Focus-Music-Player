@@ -6,23 +6,51 @@ import LikeBtn from './Buttons/LikeBtn';
 import { timeConverter } from '../helpers';
 
 class PlayingBar extends React.Component {
-  // static propTypes = {
-  //   audioRef: PropTypes.shape({
-  //     current: PropTypes.instanceOf(Element),
-  //   }).isRequired,
-  //   album: PropTypes.shape({
-  //     artist: PropTypes.string.isRequired,
-  //     albumCover: PropTypes.string.isRequired,
-  //   }).isRequired,
-  //   currentSong: PropTypes.shape({
-  //     title: PropTypes.string.isRequired,
-  //     featuring: PropTypes.string.isRequired,
-  //     liked: PropTypes.bool.isRequired,
-  //     path: PropTypes.string.isRequired,
-  //   }).isRequired,
-  //   playSong: PropTypes.func.isRequired,
-  //   isPlaying: PropTypes.bool.isRequired,
-  // };
+  static propTypes = {
+    audioRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
+    album: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      albumCover: PropTypes.string.isRequired,
+    }).isRequired,
+    currentSong: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      featuring: PropTypes.string.isRequired,
+      liked: PropTypes.bool.isRequired,
+      path: PropTypes.string.isRequired,
+    }).isRequired,
+    playSong: PropTypes.func.isRequired,
+    isPlaying: PropTypes.bool.isRequired,
+  };
+
+  volumeBarRef = React.createRef();
+
+  volumeProgress = React.createRef();
+
+  componentDidMount() {
+    this.setDefaultVolume();
+  }
+
+  setDefaultVolume = () => {
+    const audio = this.props.audioRef.current;
+    const volumeProgress = this.volumeProgress.current;
+
+    audio.volume = 0.6;
+    volumeProgress.style.width = `${audio.volume * 100}%`;
+  };
+
+  adjustVolume = e => {
+    const audio = this.props.audioRef.current;
+    const volumeProgress = this.volumeProgress.current;
+    const volumeBar = this.volumeBarRef.current;
+    const volumeBarWidth = volumeBar.offsetWidth;
+    const currentPosition = e.nativeEvent.offsetX;
+    const volumeRatio = currentPosition / volumeBarWidth;
+
+    audio.volume = volumeRatio;
+    volumeProgress.style.width = `${volumeRatio * 100}%`;
+  };
 
   render() {
     const {
@@ -89,7 +117,6 @@ class PlayingBar extends React.Component {
                   />
                 </g>
               </svg>
-              {/* <img src="/images/bar_shuffle.svg" alt="Shuffle" className="controller__-img" /> */}
             </div>
             <div className="controller__btn" onClick={playLast} role="button">
               <img
@@ -125,9 +152,9 @@ class PlayingBar extends React.Component {
               <span className="volume__icon">
                 <img src="/images/bar_volume_up.svg" alt="Adjust volume" className="volumn__img" />
               </span>
-              <div className="volume__bar">
+              <div ref={this.volumeBarRef} className="volume__bar" onClick={this.adjustVolume}>
                 <div className="volume__bar-wrapper">
-                  <div className="volume__bar-progress" />
+                  <div ref={this.volumeProgress} className="volume__bar-progress" />
                 </div>
               </div>
             </div>

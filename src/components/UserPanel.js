@@ -1,6 +1,6 @@
 import React from 'react';
 
-function UserPanel() {
+const UserPanel = () => {
   return (
     <div className="user-panel">
       <div className="user-panel__avatar">
@@ -17,6 +17,6 @@ function UserPanel() {
       </div>
     </div>
   );
-}
+};
 
 export default UserPanel;
