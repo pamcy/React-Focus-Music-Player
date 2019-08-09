@@ -1,10 +1,12 @@
 import React from 'react';
+
 import CoverArtist from './CoverArtist';
 import Playlist from './Playlist';
 import UserPanel from './UserPanel';
 import PlayingBar from './PlayingBar';
 
 import albumInfo from '../initial-playlist';
+import { getRandomNumber } from '../helpers';
 
 class App extends React.Component {
   state = {
@@ -14,6 +16,7 @@ class App extends React.Component {
     duration: null,
     isPlaying: false,
     repeatMode: false,
+    shuffleMode: false,
   };
 
   audioRef = React.createRef();
@@ -123,13 +126,23 @@ class App extends React.Component {
 
   handleAudioEnd = () => {
     const audio = this.audioRef.current;
-    const { repeatMode, isPlaying } = this.state;
+    const { album, repeatMode, shuffleMode, isPlaying } = this.state;
 
     if (!audio.ended) return;
 
     if (repeatMode) {
       this.setState({ isPlaying: !isPlaying });
       audio.currentTime = 0;
+      this.playSong();
+    } else if (shuffleMode) {
+      const totalTracks = album.tracks.length;
+      const randomTrack = getRandomNumber(0, totalTracks - 1);
+
+      this.setState({
+        currentSong: album.tracks[randomTrack],
+        isPlaying: !isPlaying,
+      });
+
       this.playSong();
     } else {
       this.playNext();
@@ -149,6 +162,11 @@ class App extends React.Component {
   toggleRepeatMode = () => {
     const { repeatMode } = this.state;
     this.setState({ repeatMode: !repeatMode });
+  };
+
+  toggleShuffleMode = () => {
+    const { shuffleMode } = this.state;
+    this.setState({ shuffleMode: !shuffleMode });
   };
 
   render() {
@@ -182,6 +200,7 @@ class App extends React.Component {
             playNext={this.playNext}
             updateCurrentTime={this.updateCurrentTime}
             toggleRepeatMode={this.toggleRepeatMode}
+            toggleShuffleMode={this.toggleShuffleMode}
           />
         </div>
       </div>

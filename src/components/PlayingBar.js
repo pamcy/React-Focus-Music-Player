@@ -41,10 +41,13 @@ class PlayingBar extends React.Component {
       updateCurrentTime,
       repeatMode,
       toggleRepeatMode,
+      shuffleMode,
+      toggleShuffleMode,
     } = this.props;
 
     const playStatus = isPlaying ? 'pause' : 'play';
     const repeatStatus = repeatMode ? '#964a4d' : '#fff';
+    const shuffleStatus = shuffleMode ? '#964a4d' : '#fff';
 
     return (
       <div className="playing-bar">
@@ -76,8 +79,17 @@ class PlayingBar extends React.Component {
             </div>
           </div>
           <div className="panel__controller">
-            <div className="controller__btn">
-              <img src="/images/bar_shuffle.svg" alt="Shuffle" className="controller__-img" />
+            <div className="controller__btn" onClick={toggleShuffleMode}>
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <defs />
+                <g transform="translate(-4 -4)">
+                  <path
+                    style={{ fill: shuffleStatus }}
+                    d="M10.59,9.17,5.41,4,4,5.41l5.17,5.17ZM14.5,4l2.04,2.04L4,18.59,5.41,20,17.96,7.46,20,9.5V4Zm.33,9.41-1.41,1.41,3.13,3.13L14.5,20H20V14.5l-2.04,2.04-3.13-3.13Z"
+                  />
+                </g>
+              </svg>
+              {/* <img src="/images/bar_shuffle.svg" alt="Shuffle" className="controller__-img" /> */}
             </div>
             <div className="controller__btn" onClick={playLast} role="button">
               <img
