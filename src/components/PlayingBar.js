@@ -39,8 +39,12 @@ class PlayingBar extends React.Component {
       playNext,
       isPlaying,
       updateCurrentTime,
+      repeatMode,
+      toggleRepeatMode,
     } = this.props;
+
     const playStatus = isPlaying ? 'pause' : 'play';
+    const repeatStatus = repeatMode ? '#964a4d' : '#fff';
 
     return (
       <div className="playing-bar">
@@ -92,8 +96,16 @@ class PlayingBar extends React.Component {
             <div className="controller__btn" onClick={playNext}>
               <img src="/images/bar_next_song.svg" alt="Next song" className="controller__img" />
             </div>
-            <div className="controller__btn">
-              <img src="/images/bar_repeat.svg" alt="Repeat" className="controller__img" />
+            <div className="controller__btn" onClick={toggleRepeatMode}>
+              <svg width="18" height="20" viewBox="0 0 18 20">
+                <defs />
+                <g transform="translate(-3 -2)">
+                  <path
+                    style={{ fill: repeatStatus }}
+                    d="M7,7H17v3l4-4L17,2V5H5v6H7ZM17,17H7V14L3,18l4,4V19H19V13H17Z"
+                  />
+                </g>
+              </svg>
             </div>
           </div>
           <div className="panel__right">

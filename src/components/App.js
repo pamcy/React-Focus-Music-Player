@@ -13,6 +13,7 @@ class App extends React.Component {
     currentTime: null,
     duration: null,
     isPlaying: false,
+    repeatMode: false,
   };
 
   audioRef = React.createRef();
@@ -28,7 +29,7 @@ class App extends React.Component {
 
     this.init();
     audio.addEventListener('canplay', this.saveSongDuration);
-    audio.addEventListener('timeupdate', this.updateProgressBar);
+    audio.addEventListener('timeupdate', this.handleTimeUpdateEvent);
   }
 
   init = () => {
@@ -95,11 +96,15 @@ class App extends React.Component {
     });
   };
 
-  updateProgressBar = e => {
+  handleTimeUpdateEvent = e => {
     this.setState({
       currentTime: e.target.currentTime,
     });
+    this.updateProgressBar(e);
+    this.handleAudioEnd();
+  };
 
+  updateProgressBar = e => {
     const audio = this.audioRef.current;
     const playedBar = this.playedRef.current;
     const { currentTime, duration } = this.state;
@@ -114,8 +119,19 @@ class App extends React.Component {
     const bufferBar = this.bufferRef.current;
 
     bufferBar.style.transform = `translateX(${-(100 - bufferedRatio)}%)`;
+  };
 
-    if (audio.ended) {
+  handleAudioEnd = () => {
+    const audio = this.audioRef.current;
+    const { repeatMode, isPlaying } = this.state;
+
+    if (!audio.ended) return;
+
+    if (repeatMode) {
+      this.setState({ isPlaying: !isPlaying });
+      audio.currentTime = 0;
+      this.playSong();
+    } else {
       this.playNext();
     }
   };
@@ -128,6 +144,11 @@ class App extends React.Component {
     const { duration } = this.state;
 
     audio.currentTime = playedRatio * duration;
+  };
+
+  toggleRepeatMode = () => {
+    const { repeatMode } = this.state;
+    this.setState({ repeatMode: !repeatMode });
   };
 
   render() {
@@ -160,6 +181,7 @@ class App extends React.Component {
             playLast={this.playLast}
             playNext={this.playNext}
             updateCurrentTime={this.updateCurrentTime}
+            toggleRepeatMode={this.toggleRepeatMode}
           />
         </div>
       </div>
