@@ -66,6 +66,10 @@
   @extend %medium--18;
 }
 
+.table-item__song {
+  cursor: pointer;
+}
+
 .table-item__featuring {
   @extend %medium--12;
 
@@ -76,13 +80,3 @@
 .table-item__total-likes {
   @extend %text--14;
 }
-
-// .table-item__length,
-// .table-head__length,
-// .table-head__title,
-// .table-item__song,
-// .table-head__no,
-// .table-item__no,
-// .table-item__playing-icon {
-//   border: 1px solid green;
-// }

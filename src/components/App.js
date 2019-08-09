@@ -59,6 +59,18 @@ class App extends React.Component {
     }
   };
 
+  playSingleSong = index => {
+    const { album } = this.state;
+
+    this.setState(
+      {
+        currentSong: album.tracks[index],
+        isPlaying: false,
+      },
+      () => this.playSong()
+    );
+  };
+
   playLast = () => {
     const { album, currentSong } = this.state;
     const { tracks } = album;
@@ -184,9 +196,10 @@ class App extends React.Component {
           />
           <Playlist
             album={album}
-            playSong={this.playSong}
             isPlaying={isPlaying}
             currentSong={currentSong}
+            playSong={this.playSong}
+            playSingleSong={this.playSingleSong}
           />
           <UserPanel />
           <PlayingBar

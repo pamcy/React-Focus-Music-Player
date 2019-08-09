@@ -5,7 +5,7 @@ import PlayBtn from './Buttons/PlayBtn';
 import LikeBtn from './Buttons/LikeBtn';
 
 const Playlist = props => {
-  const { album, playSong, isPlaying, currentSong } = props;
+  const { album, playSong, isPlaying, currentSong, playSingleSong } = props;
 
   return (
     <div className="playlist">
@@ -43,7 +43,7 @@ const Playlist = props => {
                 style={{ opacity: track.id === currentSong.id ? '1' : '0' }}
               />
               <span className="table-item__no">{i + 1}</span>
-              <h3 className="table-item__song">
+              <h3 className="table-item__song" onClick={() => playSingleSong(i)}>
                 {track.title}
                 <span className="table-item__featuring">{`(featuring ${track.featuring})`}</span>
               </h3>
