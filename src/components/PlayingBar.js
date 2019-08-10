@@ -71,6 +71,7 @@ class PlayingBar extends React.Component {
       toggleRepeatMode,
       shuffleMode,
       toggleShuffleMode,
+      toggleLikedSong,
     } = this.props;
 
     const playStatus = isPlaying ? 'pause' : 'play';
@@ -158,7 +159,11 @@ class PlayingBar extends React.Component {
                 </div>
               </div>
             </div>
-            <LikeBtn />
+            <LikeBtn
+              index={currentSong.id - 1}
+              likeStatus={currentSong.liked}
+              toggleLikedSong={toggleLikedSong}
+            />
           </div>
         </div>
         <audio src={currentSong.path} ref={audioRef}>

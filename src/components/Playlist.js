@@ -5,7 +5,7 @@ import PlayBtn from './Buttons/PlayBtn';
 import LikeBtn from './Buttons/LikeBtn';
 
 const Playlist = props => {
-  const { album, playSong, isPlaying, currentSong, playSingleSong } = props;
+  const { album, playSong, isPlaying, currentSong, playSingleSong, toggleLikedSong } = props;
 
   return (
     <div className="playlist">
@@ -49,7 +49,7 @@ const Playlist = props => {
               </h3>
               <span className="table-item__length">{track.length}</span>
               <span className="table-item__total-likes">{track.totalLikes}</span>
-              <LikeBtn likeStatus={track.liked} />
+              <LikeBtn index={i} likeStatus={track.liked} toggleLikedSong={toggleLikedSong} />
             </li>
           ))}
         </ul>

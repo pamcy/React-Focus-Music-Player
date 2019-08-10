@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LikeBtn = ({ likeStatus }) => {
+const LikeBtn = ({ index, likeStatus, toggleLikedSong }) => {
   const fillColor = { fill: likeStatus ? '#964a4d' : 'none' };
 
   return (
-    <button type="button" className="like-btn">
+    <button type="button" className="like-btn" onClick={() => toggleLikedSong(index)}>
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="24.15" viewBox="0 0 26 24.15">
         <g transform="translate(1 -1.004)">
           <g transform="translate(0 2.004)">

@@ -31,12 +31,16 @@
   color: $white;
 }
 
+.playlist__table {
+  padding-bottom: rem(45);
+}
+
 .playlist__table-item {
   display: grid;
-  grid-template-columns: 2% 3% 65% 8% auto auto;
+  grid-template-columns: 2% 3% 65% 8% 6% auto;
   grid-column-gap: rem(30);
   align-items: center;
-  padding: rem(16) rem(60) rem(16) rem(30);
+  padding: rem(16) rem(70) rem(16) rem(30);
   color: $white;
 
   &:not(:last-of-type) {

@@ -181,6 +181,19 @@ class App extends React.Component {
     this.setState({ shuffleMode: !shuffleMode });
   };
 
+  toggleLikedSong = index => {
+    const { album } = this.state;
+    const newTracks = [...album.tracks];
+    newTracks[index].liked = !newTracks[index].liked;
+
+    this.setState({
+      album: {
+        ...album,
+        tracks: newTracks,
+      },
+    });
+  };
+
   render() {
     const { album, currentSong, isPlaying } = this.state;
 
@@ -200,6 +213,7 @@ class App extends React.Component {
             currentSong={currentSong}
             playSong={this.playSong}
             playSingleSong={this.playSingleSong}
+            toggleLikedSong={this.toggleLikedSong}
           />
           <UserPanel />
           <PlayingBar
@@ -214,6 +228,7 @@ class App extends React.Component {
             updateCurrentTime={this.updateCurrentTime}
             toggleRepeatMode={this.toggleRepeatMode}
             toggleShuffleMode={this.toggleShuffleMode}
+            toggleLikedSong={this.toggleLikedSong}
           />
         </div>
       </div>
