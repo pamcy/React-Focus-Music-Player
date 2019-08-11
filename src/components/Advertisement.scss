@@ -1,0 +1,56 @@
+.ad {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  &.open {
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+}
+
+.ad__wrapper {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  max-width: 80%;
+  margin: rem(30) auto;
+  transform: scale(0.9);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  .open & {
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.ad__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: rem(5);
+}
+
+.ad__caption {
+  @extend %text--14;
+
+  padding-left: rem(10);
+  color: $gray;
+  text-transform: uppercase;
+}
+
+.ad__close-btn {
+  padding-right: rem(10);
+  width: rem(40);
+  cursor: pointer;
+}
+
+.ad__img {
+  border: 10px solid $white;
+}

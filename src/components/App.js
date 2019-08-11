@@ -4,6 +4,7 @@ import CoverArtist from './CoverArtist';
 import Playlist from './Playlist';
 import UserPanel from './UserPanel';
 import PlayingBar from './PlayingBar';
+import Advertisement from './Advertisement';
 
 import albumInfo from '../initial-playlist';
 import { getRandomNumber } from '../helpers';
@@ -115,6 +116,7 @@ class App extends React.Component {
     this.setState({
       currentTime: e.target.currentTime,
     });
+
     this.updateProgressBar(e);
     this.handleAudioEnd();
   };
@@ -138,9 +140,9 @@ class App extends React.Component {
 
   handleAudioEnd = () => {
     const audio = this.audioRef.current;
-    const { album, repeatMode, shuffleMode, isPlaying } = this.state;
-
     if (!audio.ended) return;
+
+    const { album, repeatMode, shuffleMode, isPlaying } = this.state;
 
     if (repeatMode) {
       this.setState({ isPlaying: !isPlaying });
@@ -231,6 +233,7 @@ class App extends React.Component {
             toggleLikedSong={this.toggleLikedSong}
           />
         </div>
+        <Advertisement audioRef={this.audioRef} />
       </div>
     );
   }
