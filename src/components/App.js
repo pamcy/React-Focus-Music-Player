@@ -1,4 +1,5 @@
 import React from 'react';
+import GithubCorner from 'react-github-corner';
 
 import CoverArtist from './CoverArtist';
 import Playlist from './Playlist';
@@ -235,6 +236,7 @@ class App extends React.Component {
           />
         </div>
         <Advertisement audioRef={this.audioRef} />
+        <GithubCorner direction="left" href="https://github.com/pamcy/React-Focus-Music-Player" />
       </div>
     );
   }
