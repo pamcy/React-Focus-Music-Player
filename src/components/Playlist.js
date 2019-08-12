@@ -71,8 +71,10 @@ Playlist.propTypes = {
   playSong: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   currentSong: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
   }).isRequired,
+  playSingleSong: PropTypes.func.isRequired,
+  toggleLikedSong: PropTypes.func.isRequired,
 };
 
 export default Playlist;

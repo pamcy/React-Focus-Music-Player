@@ -9,6 +9,9 @@ const playBtn = ({ playSong, isPlaying }) => {
   );
 };
 
-playBtn.propTypes = {};
+playBtn.propTypes = {
+  playSong: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+};
 
 export default playBtn;

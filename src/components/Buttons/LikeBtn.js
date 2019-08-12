@@ -23,7 +23,13 @@ const LikeBtn = ({ index, likeStatus, toggleLikedSong }) => {
 };
 
 LikeBtn.propTypes = {
-  likeStatus: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  likeStatus: PropTypes.bool,
+  toggleLikedSong: PropTypes.func.isRequired,
+};
+
+LikeBtn.defaultProps = {
+  likeStatus: false,
 };
 
 export default LikeBtn;

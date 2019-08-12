@@ -39,6 +39,8 @@ CoverArtist.propTypes = {
   artist: PropTypes.string.isRequired,
   artistCover: PropTypes.string.isRequired,
   followers: PropTypes.string.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  playSong: PropTypes.func.isRequired,
 };
 
 export default CoverArtist;

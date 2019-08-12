@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Advertisement extends React.Component {
+  static propTypes = {
+    audioRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
+  };
+
   state = {
     adIsOpen: false,
     count: null,
@@ -58,14 +64,12 @@ class Advertisement extends React.Component {
             />
           </div>
           <div className="ad__main">
-            <img src="/images/advertisement.png" alt="" className="ad__img" />
+            <img src="/images/advertisement.png" alt="Subscribe today" className="ad__img" />
           </div>
         </div>
       </div>
     );
   }
 }
-
-Advertisement.propTypes = {};
 
 export default Advertisement;

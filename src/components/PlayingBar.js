@@ -10,18 +10,43 @@ class PlayingBar extends React.Component {
     audioRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }).isRequired,
+    progressBarRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
+    playedRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
+    bufferRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }).isRequired,
     album: PropTypes.shape({
       artist: PropTypes.string.isRequired,
       albumCover: PropTypes.string.isRequired,
     }).isRequired,
     currentSong: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      featuring: PropTypes.string.isRequired,
-      liked: PropTypes.bool.isRequired,
-      path: PropTypes.string.isRequired,
+      id: PropTypes.number,
+      title: PropTypes.string,
+      featuring: PropTypes.string,
+      liked: PropTypes.bool,
+      path: PropTypes.string,
     }).isRequired,
+    currentTime: PropTypes.number,
+    duration: PropTypes.number,
     playSong: PropTypes.func.isRequired,
+    playLast: PropTypes.func.isRequired,
+    playNext: PropTypes.func.isRequired,
     isPlaying: PropTypes.bool.isRequired,
+    updateCurrentTime: PropTypes.func.isRequired,
+    repeatMode: PropTypes.bool.isRequired,
+    toggleRepeatMode: PropTypes.func.isRequired,
+    shuffleMode: PropTypes.bool.isRequired,
+    toggleShuffleMode: PropTypes.func.isRequired,
+    toggleLikedSong: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    currentTime: 0,
+    duration: 0,
   };
 
   volumeBarRef = React.createRef();
@@ -36,7 +61,7 @@ class PlayingBar extends React.Component {
     const audio = this.props.audioRef.current;
     const volumeProgress = this.volumeProgress.current;
 
-    audio.volume = 0.6;
+    audio.volume = 0.5;
     volumeProgress.style.width = `${audio.volume * 100}%`;
   };
 
