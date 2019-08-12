@@ -3,9 +3,12 @@
 
   width: 128px;
   padding: rem(7) rem(10);
-  border: 1px solid $red;
+  background-color: $black;
+  border: 1px solid $white;
   border-radius: 20px;
-  color: $red;
+  color: $white;
   text-align: center;
   text-transform: uppercase;
+  transition: transform 0.1s;
+  cursor: default;
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const playBtn = ({ playSong, isPlaying }) => {
   return (
-    <button type="button" className="play-btn" onClick={playSong}>
+    <button type="button" className={`play-btn ${isPlaying ? 'pause' : ''}`} onClick={playSong}>
       {isPlaying ? 'Pause' : 'Play'}
     </button>
   );

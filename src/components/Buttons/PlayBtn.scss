@@ -10,10 +10,14 @@
   text-align: center;
   text-transform: uppercase;
   transform: scale(1);
-  transition: all 0.1s;
+  transition: transform 0.1s;
+
+  &.pause {
+    color: $red;
+    background-color: $black;
+  }
 
   &:hover {
     transform: scale(1.03);
-    background-color: lighten($red, 10%);
   }
 }
