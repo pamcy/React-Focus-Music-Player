@@ -121,7 +121,18 @@ class App extends React.Component {
     this.handleAudioEnd();
   };
 
-  updateProgressBar = e => {
+  updateCurrentTime = e => {
+    const audio = this.audioRef.current;
+    const progressBar = this.progressBarRef.current;
+    const totalWidth = progressBar.offsetWidth;
+    const offsetLeft = progressBar.getBoundingClientRect().left;
+    const playedRatio = (e.pageX - offsetLeft) / totalWidth;
+    const { duration } = this.state;
+
+    audio.currentTime = playedRatio * duration;
+  };
+
+  updateProgressBar = () => {
     const audio = this.audioRef.current;
     const playedBar = this.playedRef.current;
     const { currentTime, duration } = this.state;
@@ -161,16 +172,6 @@ class App extends React.Component {
     } else {
       this.playNext();
     }
-  };
-
-  updateCurrentTime = e => {
-    const audio = this.audioRef.current;
-    const progressBar = this.progressBarRef.current;
-    const totalWidth = progressBar.offsetWidth;
-    const playedRatio = e.pageX / totalWidth;
-    const { duration } = this.state;
-
-    audio.currentTime = playedRatio * duration;
   };
 
   toggleRepeatMode = () => {
