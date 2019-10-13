@@ -1,4 +1,4 @@
-# React Foucs Music Player [![Netlify Status](https://api.netlify.com/api/v1/badges/d4010957-09fe-435a-91aa-69e8caa0d325/deploy-status)](https://app.netlify.com/sites/react-focus-music-player/deploys)
+# React Focus Music Player [![Netlify Status](https://api.netlify.com/api/v1/badges/d4010957-09fe-435a-91aa-69e8caa0d325/deploy-status)](https://app.netlify.com/sites/react-focus-music-player/deploys)
 
 This time I try to make a mini version of Spotify-like clone from scratch, with React and the native HTML5 `audio` element to play music without any library, best music to stay productive at work.
 
